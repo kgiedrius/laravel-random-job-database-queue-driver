@@ -6,7 +6,7 @@ Just like the database queue driver, but process jobs in random order.
 
 Require the latest version of this package with Composer
 
-    composer require KGiedrius/laravel-random-job-database-queue-driver:"1.0"
+    composer require KGiedrius/laravel-random-job-database-queue-driver:"1.x"
 
 Add the Service Provider to the providers array in config/app.php
 
