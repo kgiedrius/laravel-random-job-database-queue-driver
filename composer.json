@@ -1,0 +1,28 @@
+{
+    "name": "kgiedrius/laravel-random-job-database-queue-driver",
+    "description": "Modified Database Queue driver which takes pushed jobs in random order",
+    "keywords": ["laravel", "queue", "random queue"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giedrius Korsakas",
+            "email": "kgiedrius@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "illuminate/support": "5.0.x|5.1.x|5.2.x",
+        "illuminate/console": "5.0.x|5.1.x|5.2.x",
+        "symfony/process": "~2.6|~3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "KGiedrius\\Queue\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
