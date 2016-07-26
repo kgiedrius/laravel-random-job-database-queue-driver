@@ -10,7 +10,7 @@ Require the latest version of this package with Composer
 
 Add the Service Provider to the providers array in config/app.php
 
-    KGiedrius\Queue\RandomDatabaseJobServiceProvider::class,
+    KGiedrius\Queue\DbRandServiceProvider::class,
 
 You need to create the migration table for queues and run it.
 

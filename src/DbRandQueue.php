@@ -11,14 +11,18 @@ class DbRandQueue extends DatabaseQueue
 {
     protected function getNextAvailableJob($queue)
     {
+
         $job = $this->database->table($this->table)
             ->lockForUpdate()
-            ->where('queue', $this->getQueue($queue))
+            // ->where('queue', $this->getQueue($queue))
             ->where('reserved', 0)
             ->where('available_at', '<=', $this->getTime())
-            ->orderBy('id', 'asc')
+            ->orderByRaw('rand()')
             ->first();
 
-        return $job ? (object) $job : null;
+        if ($job) echo $job->queue.':'.$job->id.';';
+
+
+        return $job ? (object)$job : null;
     }
 }
