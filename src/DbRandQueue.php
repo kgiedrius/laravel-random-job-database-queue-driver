@@ -11,13 +11,16 @@ class DbRandQueue extends DatabaseQueue
 {
     protected function getNextAvailableJob($queue)
     {
+        $orderBy = config('database.default') == 'sqlite' ? 'random()' : 'rand()';
+
+
 
         $job = $this->database->table($this->table)
             ->lockForUpdate()
             // ->where('queue', $this->getQueue($queue))
             ->where('reserved', 0)
             ->where('available_at', '<=', $this->getTime())
-            ->orderByRaw('rand()')
+            ->orderByRaw($orderBy)
             ->first();
 
         if ($job) echo $job->queue.':'.$job->id.';';
