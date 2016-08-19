@@ -19,11 +19,10 @@ class DbRandQueue extends DatabaseQueue
 
         if (false !== strpos($queue, ':')) {
             list($from, $to) = explode(':', $queue);
-            $query = $query->where('queue', '>=', (int)$from)->where('queue', '<=', (int)$to);
-        } elseif ($queue) {
-            $query = $query->where('queue', '=', (int)$queue);
+            $query = $query->whereRaw("queue >= " . ((int)$from))->whereRaw("queue <= " . ((int)$to));
+        } else {
+            $query = $query->where('queue', '=', $queue);
         }
-
 
         $job = $query->first();
 
@@ -33,14 +32,14 @@ class DbRandQueue extends DatabaseQueue
     protected function buildDatabaseRecord($queue, $payload, $availableAt, $attempts = 0)
     {
         return [
-            'queue' => $queue,
-            'attempts' => $attempts,
-            'reserved' => 0,
-            'reserved_at' => null,
+            'queue'        => $queue,
+            'attempts'     => $attempts,
+            'reserved'     => 0,
+            'reserved_at'  => null,
             'available_at' => $availableAt,
-            'created_at' => $this->getTime(),
-            'priority' => rand(1,10000),
-            'payload' => $payload,
+            'created_at'   => $this->getTime(),
+            'priority'     => rand(1, 10000),
+            'payload'      => $payload,
         ];
     }
 
