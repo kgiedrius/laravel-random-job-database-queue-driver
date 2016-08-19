@@ -20,9 +20,10 @@ class DbRandQueue extends DatabaseQueue
         if (false !== strpos($queue, ':')) {
             list($from, $to) = explode(':', $queue);
             $query = $query->where('queue', '>=', (int)$from)->where('queue', '<=', (int)$to);
-        } else {
-            $query = $query->where('queue', '>=', (int)$queue);
+        } elseif ($queue) {
+            $query = $query->where('queue', '=', (int)$queue);
         }
+
 
         $job = $query->first();
 
