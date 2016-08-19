@@ -17,10 +17,7 @@ class DbRandQueue extends DatabaseQueue
             ->where('available_at', '<=', $this->getTime())
             ->orderBy('priority', 'desc');
 
-        if (false !== strpos($queue, ':')) {
-            list($from, $to) = explode(':', $queue);
-            $query = $query->whereRaw("queue >= " . ((int)$from))->whereRaw("queue <= " . ((int)$to));
-        } else {
+        if ($queue != 'default') {
             $query = $query->where('queue', '=', $queue);
         }
 
